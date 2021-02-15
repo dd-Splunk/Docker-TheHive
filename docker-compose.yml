@@ -1,0 +1,64 @@
+version: "3.8"
+services:
+
+  cassandra:
+    image: cassandra:3.11
+    hostname: cassandra
+    restart: unless-stopped    
+    environment:
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=1G    
+      - CASSANDRA_CLUSTER_NAME=thp
+    volumes:
+      - c-data:/var/lib/cassandra/data:rw
+    networks:
+      - db
+
+  elasticsearch:
+    image: elasticsearch:7.8.1
+    ports:
+      - 9200:9200
+    environment:
+      - http.host=0.0.0.0
+      - discovery.type=single-node
+      - script.allowed_types=inline
+      - thread_pool.search.queue_size=100000
+      - thread_pool.write.queue_size=10000
+    volumes:
+      - e-data:/usr/share/elasticsearch/data:rw
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+      
+  cortex:
+    image: thehiveproject/cortex:3.1.0-1
+    depends_on:
+      - elasticsearch
+    ports:
+      - 9001:9001
+    
+  thehive:
+    image: thehiveproject/thehive4:4.0.2-1
+    depends_on:
+      - cassandra
+    volumes:
+      - ./application.conf:/etc/thehive/application.conf
+    ports:
+      - 9000:9000
+    command: 
+      --cortex-port 9001 
+      --cortex-keys ${CORTEX_KEY}
+    networks:
+      - db
+
+            
+volumes:
+  e-data:
+    driver: local
+  c-data:
+    driver: local   
+    
+networks:
+  db: {}
+
