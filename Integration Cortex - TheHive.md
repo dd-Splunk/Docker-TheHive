@@ -64,11 +64,9 @@ curl -X GET "localhost:9200/_cat/indices?v"
   CORTEX_KEY=<Cortex API Key>
   ```
 
-  
-
 ### Continue with TheHive + Cassandra
 
-- `docker-compose up -d thehive cassandra ; docker-compose logs -f`
+- `docker-compose up -d thehive; docker-compose logs -f`
 - http://localhost:9000
 - Update (create DB)
 - Update 
