@@ -10,7 +10,7 @@ Backend: ElasticSearch
 
 Port: 9000
 
-Backend: Cassandra
+Backend: ElasticSearch
 
 ## Steps
 
