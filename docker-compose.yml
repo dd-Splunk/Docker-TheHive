@@ -32,6 +32,7 @@ services:
 
   thehive:
     image: thehiveproject/thehive4:4.0.2-1
+    # Avoid Cassandra backend by commenting below
     # volumes:
     #   - ./application.conf:/etc/thehive/application.conf
     ports:
