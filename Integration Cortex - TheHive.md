@@ -75,7 +75,6 @@ xxx
 
 ##References
 
-https://github.com/dd-Splunk/TheHive.git
-
-https://medium.com/@ibrahim.ayadhi/case-management-20d8fd815ee2
+- https://github.com/dd-Splunk/TheHive.git
+- https://medium.com/@ibrahim.ayadhi/case-management-20d8fd815ee2
 
