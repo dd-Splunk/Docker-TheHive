@@ -76,4 +76,5 @@ curl -X GET "localhost:9200/_cat/indices?v"
 
 - https://github.com/dd-Splunk/TheHive.git
 - https://medium.com/@ibrahim.ayadhi/case-management-20d8fd815ee2
+- https://blog.agood.cloud/posts/2019/09/27/integrate-thehive-and-cortex/
 
