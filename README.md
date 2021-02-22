@@ -1,2 +1,2 @@
 # TheHive
-TheHive implementation for my customer
+TheHive - Cortex implementation for my customer
