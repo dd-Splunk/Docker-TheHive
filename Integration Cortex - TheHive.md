@@ -1,12 +1,12 @@
-#Integration Cortex - TheHive
+# Integration Cortex - TheHive
 
-##Cortex
+## Cortex
 
 Port: 9001
 
 Backend: ElasticSearch
 
-##TheHive
+## TheHive
 
 Port: 9000
 
@@ -82,7 +82,7 @@ curl -X GET "localhost:9200/_cat/indices?v"
 - Check Integration:
   - Top right -> About
 
-##References
+## References
 
 - https://github.com/dd-Splunk/TheHive.git
 - https://medium.com/@ibrahim.ayadhi/case-management-20d8fd815ee2
