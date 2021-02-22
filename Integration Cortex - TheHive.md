@@ -2,17 +2,74 @@
 
 ## Cortex
 
-Port: 9001
+- Port: 9001
 
-Backend: ElasticSearch
+- Backend: ElasticSearch
+
 
 ## TheHive
 
-Port: 9000
+- Port: 9000
 
-Backend: Cassandra
+- Backend: Cassandra
+
 
 ## Steps
+
+## Start with cortex + elasticsearch
+
+- `docker-compose up -d cortex elasticsearch ; docker-compose logs -f`
+
+- http://localhost:9001
+
+- Update (create DB)
+
+- Create `admin` user
+
+- Login as `admin`
+
+- Create Organisation *ButterCup*
+
+- Create user `dd` in the *ButterCup* organisation with OrgAdmin role
+
+- Set user `dd` password
+
+- Logout `admin` 
+
+- Login `dd`
+
+- Create user `thehive-cortex` user with read, analyze role
+
+- Create Cortex API key for user `thehive-cortex`
+
+- Update `thehive/application.conf` file with the API key just created
+
+  ```
+  cortex {
+    servers = [
+      {
+        name = local
+        url = "http://cortex:9001"
+        auth {
+          type = "bearer"
+          key = "<CORTEX_API_KEY>"
+        }
+      }
+    ]
+  ```
+
+- Configure Analyzers like Virus Total
+- ...
+
+### Continue with TheHive + Cassandra
+
+- `docker-compose up -d; docker-compose logs -f`
+- http://localhost:9000
+- Default credentials: `admin / secret` 
+- Check Integration:
+  - Top right -> About
+
+- ...
 
 ### Check elasticsearch
 
@@ -33,54 +90,6 @@ curl -X GET "localhost:9200/_cat/shards"
 ```
 curl -X GET "localhost:9200/_cat/indices?v"
 ```
-
-## Start with cortex + elasticsearch
-
-- `docker-compose up -d cortex elasticsearch ; docker-compose logs -f`
-
-- http://localhost:9001
-
-- Update (create DB)
-
-- Create Admin user
-
-- Login as admin
-
-- Create Organisation ButterCup
-
-- Create user dd in the ButterCup organisation with OrgAdmin role
-
-- Set user dd password
-
-- Logout admin / login dd
-
-- Create user thehive-cortex with read, analyze role
-
-- Create Cortex API Key for user thehive-cortex
-
-- Update `thehive/application.conf` file with  
-
-  ```
-  cortex {
-    servers = [
-      {
-        name = local
-        url = "http://cortex:9001"
-        auth {
-          type = "bearer"
-          key = "<CORTEX_API_KEY>"
-        }
-      }
-    ]
-  ```
-
-### Continue with TheHive
-
-- `docker-compose up -d thehive; docker-compose logs -f`
-- http://localhost:9000
-- Default credentials: `admin / secret` 
-- Check Integration:
-  - Top right -> About
 
 ## References
 
