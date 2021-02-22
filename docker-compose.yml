@@ -1,17 +1,5 @@
-version: "3.8"
+version: '3.8'
 services:
-
-  # cassandra:
-  #   image: cassandra:3.11
-  #   hostname: cassandra
-  #   restart: unless-stopped
-  #   environment:
-  #     - MAX_HEAP_SIZE=1G
-  #     - HEAP_NEWSIZE=1G
-  #     - CASSANDRA_CLUSTER_NAME=thp
-  #   volumes:
-  #     - c-data:/var/lib/cassandra/data:rw
-
   elasticsearch:
     image: elasticsearch:7.9.1
     environment:
@@ -21,29 +9,51 @@ services:
       - thread_pool.search.queue_size=100000
       - thread_pool.write.queue_size=10000
     volumes:
-      - es-data:/usr/share/elasticsearch/data
+      - e-data:/usr/share/elasticsearch/data
 
   cortex:
-    image: thehiveproject/cortex:3.1.0-1
+    image: 'thehiveproject/cortex:latest'
+    container_name: cortex
+    restart: unless-stopped
+    command:
+      --job-directory ${JOB_DIRECTORY}
+    environment:
+      - 'JOB_DIRECTORY=${JOB_DIRECTORY}'
+    volumes:
+      - './cortex/application.conf:/etc/cortex/application.conf'
+      - '${JOB_DIRECTORY}:${JOB_DIRECTORY}'
+      - '/var/run/docker.sock:/var/run/docker.sock'
     depends_on:
       - elasticsearch
     ports:
       - 9001:9001
 
+  cassandra:
+    image: 'cassandra:3.11'
+    container_name: cassandra
+    hostname: cassandra
+    environment:
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=1G
+      - CASSANDRA_CLUSTER_NAME=thp
+    volumes:
+      - c-data:/var/lib/cassandra/data
   thehive:
-    image: thehiveproject/thehive4:4.0.2-1
-    # Avoid Cassandra backend by commenting below
-    # volumes:
-    #   - ./application.conf:/etc/thehive/application.conf
+    image: 'thehiveproject/thehive4:latest'
+    container_name: thehive4
+    restart: unless-stopped
+    depends_on:
+      - cassandra
     ports:
-      - 9000:9000
+      - '0.0.0.0:9000:9000'
+    volumes:
+      - ./thehive/application.conf:/etc/thehive/application.conf
+      - t-data:/opt/data
     command:
-      --cortex-port 9001
-      --cortex-keys ${CORTEX_KEY}
-
+      --no-config
+      --no-config-secret
 
 volumes:
-  es-data:
-    driver: local
-  c-data:
-    driver: local
+  e-data: {}
+  c-data: {}
+  t-data: {}
