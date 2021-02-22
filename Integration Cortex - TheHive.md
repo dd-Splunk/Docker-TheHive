@@ -10,7 +10,7 @@ Backend: ElasticSearch
 
 Port: 9000
 
-Backend: ElasticSearch
+Backend: Cassandra
 
 ## Steps
 
@@ -58,19 +58,29 @@ curl -X GET "localhost:9200/_cat/indices?v"
 
 - Create Cortex API Key for user thehive-cortex
 
-- Update `.env` file with  
+- Update `thehive/application.conf` file with  
 
   ```
-  CORTEX_KEY=<Cortex API Key>
+  cortex {
+    servers = [
+      {
+        name = local
+        url = "http://cortex:9001"
+        auth {
+          type = "bearer"
+          key = "<CORTEX_API_KEY>"
+        }
+      }
+    ]
   ```
 
 ### Continue with TheHive
 
 - `docker-compose up -d thehive; docker-compose logs -f`
 - http://localhost:9000
-- Update (create DB)
 - Default credentials: `admin / secret` 
-- ...
+- Check Integration:
+  - Top right -> About
 
 ##References
 
