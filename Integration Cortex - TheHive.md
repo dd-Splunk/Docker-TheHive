@@ -30,17 +30,17 @@
 
 - Create Organisation *ButterCup*
 
-- Create user `dd` in the *ButterCup* organisation with OrgAdmin role
+- Create user `myself` in the *ButterCup* organisation with OrgAdmin role
 
-- Set user `dd` password
+- Set user `myself` password
 
 - Logout `admin` 
 
-- Login `dd`
+- Login `myself`
 
 - Create user `thehive-cortex` user with read, analyze role
 
-- Create Cortex API key for user `thehive-cortex`
+- Create  API key for user `thehive-cortex`
 
 - Update `thehive/application.conf` file with the API key just created
 
@@ -59,6 +59,7 @@
   ```
 
 - Configure Analyzers like Virus Total
+
 - ...
 
 ### Continue with TheHive + Cassandra
@@ -68,7 +69,12 @@
 - Default credentials: `admin / secret` 
 - Check Integration:
   - Top right -> About
-
+- Create Organisation *ButterCup*
+- Create your own user `myself@splunk.com` within *ButterCup* with org-admin role
+- Set password for `myself@splunk.com` 
+- Create user `phantom@splunk.com`  within *ButterCup*  with read, analyze role
+- Create  API key for user `phantom@splunk.com` 
+  This key will be used by the corresponding Phantom application
 - ...
 
 ### Check elasticsearch
