@@ -34,7 +34,7 @@
 
 - Set user `myself` password
 
-- Logout `admin` 
+- Logout `admin`
 
 - Login `myself`
 
@@ -66,14 +66,14 @@
 
 - `docker-compose up -d; docker-compose logs -f`
 - http://localhost:9000
-- Default credentials: `admin / secret` 
+- Default credentials: `admin / secret`
 - Check Integration:
   - Top right -> About
 - Create Organisation *ButterCup*
 - Create your own user `myself@splunk.com` within *ButterCup* with org-admin role
-- Set password for `myself@splunk.com` 
+- Set password for `myself@splunk.com`
 - Create user `phantom@splunk.com`  within *ButterCup*  with read, analyze role
-- Create  API key for user `phantom@splunk.com` 
+- Create  API key for user `phantom@splunk.com`
   This key will be used by the corresponding Phantom application
 - ...
 
@@ -99,7 +99,5 @@ curl -X GET "localhost:9200/_cat/indices?v"
 
 ## References
 
-- https://github.com/dd-Splunk/TheHive.git
 - https://medium.com/@ibrahim.ayadhi/case-management-20d8fd815ee2
 - https://blog.agood.cloud/posts/2019/09/27/integrate-thehive-and-cortex/
-
