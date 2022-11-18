@@ -37,8 +37,10 @@
 - Logout `admin`
 
 - Login `myself`
+- 
+- Click `Organisation` ( top right )
 
-- Create user `thehive-cortex` user with read, analyze role
+- Add user `thehive-cortex` user with read, analyze role
 
 - Create  API key for user `thehive-cortex`
 
