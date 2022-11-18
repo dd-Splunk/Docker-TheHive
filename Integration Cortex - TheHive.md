@@ -18,7 +18,7 @@
 
 ## Start with cortex + elasticsearch
 
-- `docker-compose up -d cortex elasticsearch ; docker-compose logs -f`
+- `docker compose up -d cortex elasticsearch ; docker compose logs -f`
 
 - http://localhost:9001
 
@@ -64,7 +64,7 @@
 
 ### Continue with TheHive + Cassandra
 
-- `docker-compose up -d; docker-compose logs -f`
+- `docker compose up -d; docker compose logs -f`
 - http://localhost:9000
 - Default credentials: `admin / secret`
 - Check Integration:
