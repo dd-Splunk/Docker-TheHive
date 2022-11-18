@@ -1,11 +1,16 @@
 # Integration Cortex - TheHive
 
+```mermaid
+graph TD
+C(Cortex ) --> E(Elastic)
+H(TheHive) --> A(Cassandra)
+```
+
 ## Cortex
 
 - Port: 9001
 
 - Backend: ElasticSearch
-
 
 ## TheHive
 
